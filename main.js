@@ -1,20 +1,20 @@
 // Game Data
 const gameData = {
   "general": [
-    { id: "gen-1", title: "백수 vs 임원", q: "매달 500만 원 받는 백수<br><span class='vs'>VS</span><br>매달 1500만 원 대기업 임원", a: "500만 원 백수", b: "1500만 원 임원", vA: 620, vB: 380 },
-    { id: "gen-2", title: "라면 vs 치킨", q: "평생 라면만 먹기<br><span class='vs'>VS</span><br>평생 치킨만 먹기", a: "라면", b: "치킨", vA: 450, vB: 550 }
+    { id: "gen-1", title: "백수 vs 임원", q: "매달 500만 원 받는 백수<br><span class='vs'>VS</span><br>매달 1500만 원 대기업 임원", a: "500만 원 백수", b: "1500만 원 임원", vA: 0, vB: 0 },
+    { id: "gen-2", title: "라면 vs 치킨", q: "평생 라면만 먹기<br><span class='vs'>VS</span><br>평생 치킨만 먹기", a: "라면", b: "치킨", vA: 0, vB: 0 }
   ],
   "adult": [
-    { id: "adult-1", title: "불 꺼진 방 vs 불 켜진 방", q: "사랑을 나눌 때<br>불 꺼진 방<br><span class='vs'>VS</span><br>불 켜진 방", a: "불 꺼진 방", b: "불 켜진 방", vA: 50, vB: 50 }
+    { id: "adult-1", title: "불 꺼진 방 vs 불 켜진 방", q: "사랑을 나눌 때<br>불 꺼진 방<br><span class='vs'>VS</span><br>불 켜진 방", a: "불 꺼진 방", b: "불 켜진 방", vA: 0, vB: 0 }
   ],
   "couples": [
-    { id: "coup-1", title: "애인 폰 비번 vs 내 폰 비번", q: "애인이 내 폰 비번 알기<br><span class='vs'>VS</span><br>내가 애인 폰 비번 알기", a: "애인이 알기", b: "내가 알기", vA: 30, vB: 70 }
+    { id: "coup-1", title: "애인 폰 비번 vs 내 폰 비번", q: "애인이 내 폰 비번 알기<br><span class='vs'>VS</span><br>내가 애인 폰 비번 알기", a: "애인이 알기", b: "내가 알기", vA: 0, vB: 0 }
   ],
   "truth": [
-    { id: "truth-1", title: "전 애인 연락", q: "전 애인에게 연락 온 적 있다<br><span class='vs'>VS</span><br>없다", a: "있다", b: "없다", vA: 80, vB: 20 }
+    { id: "truth-1", title: "전 애인 연락", q: "전 애인에게 연락 온 적 있다<br><span class='vs'>VS</span><br>없다", a: "있다", b: "없다", vA: 0, vB: 0 }
   ],
   "muncheol": [
-    { id: "mun-1", title: "롤 문철빵 사연 #1", q: "탑이 라인전 밀렸는데 정글 탓 함<br><span class='vs'>VS</span><br>정글이 갱 안 가서 라인전 망함", a: "탑 잘못", b: "정글 잘못", vA: 40, vB: 60 }
+    { id: "mun-1", title: "롤 문철빵 사연 #1", q: "탑이 라인전 밀렸는데 정글 탓 함<br><span class='vs'>VS</span><br>정글이 갱 안 가서 라인전 망함", a: "탑 잘못", b: "정글 잘못", vA: 0, vB: 0 }
   ]
 };
 
@@ -121,8 +121,13 @@ function handleVote(selection) {
 
 function showStats(game, userSelection = null) {
   const total = game.vA + game.vB;
-  const pA = Math.round((game.vA / total) * 100);
-  const pB = 100 - pA;
+  let pA = 0;
+  let pB = 0;
+
+  if (total > 0) {
+    pA = Math.round((game.vA / total) * 100);
+    pB = 100 - pA;
+  }
 
   document.querySelector('.vote-buttons').classList.add('hidden');
   document.getElementById('stats-view').classList.remove('hidden');
@@ -137,10 +142,14 @@ function showStats(game, userSelection = null) {
     document.getElementById('label-b').textContent = game.b;
     
     if (userSelection) {
-      const userPercent = userSelection === 'A' ? pA : pB;
-      document.getElementById('result-text').textContent = userPercent > 50 
-        ? `당신은 ${userPercent}%의 대중적인 선택을 했습니다! 😎`
-        : `당신은 ${userPercent}%의 힙한 소수파군요! 🤡`;
+      if (total === 1) {
+        document.getElementById('result-text').textContent = `당신이 이 질문의 첫 번째 투표자입니다! 🥇`;
+      } else {
+        const userPercent = userSelection === 'A' ? pA : pB;
+        document.getElementById('result-text').textContent = userPercent > 50 
+          ? `당신은 ${userPercent}%의 대중적인 선택을 했습니다! 😎`
+          : `당신은 ${userPercent}%의 힙한 소수파군요! 🤡`;
+      }
     } else {
       const savedSelection = hasVoted(game.id);
       document.getElementById('result-text').textContent = `이미 투표 완료! (나의 선택: ${savedSelection === 'A' ? game.a : game.b})`;
