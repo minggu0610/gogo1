@@ -36,6 +36,13 @@
 
 [data-theme="light"] .game-item {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .game-item:hover {
+  background-color: var(--accent-b);
+  color: #000;
+  border-left-color: var(--accent-a);
 }
 
 [data-theme="light"] .back-btn {
