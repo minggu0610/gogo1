@@ -1,20 +1,18 @@
-// --- Firebase Configuration (Placeholder) ---
-// 구글 파이어베이스 설정에서 복사한 config 정보를 여기에 붙여넣으세요.
+// --- Firebase Configuration ---
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  databaseURL: "YOUR_DATABASE_URL",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyARt28EI9InQNsF9SomXkobb8cjK8h2reM",
+  authDomain: "gogo-ec3d3.firebaseapp.com",
+  databaseURL: "https://gogo-ec3d3-default-rtdb.firebaseio.com",
+  projectId: "gogo-ec3d3",
+  storageBucket: "gogo-ec3d3.firebasestorage.app",
+  messagingSenderId: "576809686159",
+  appId: "1:576809686159:web:ce6c9f773fa877ce2c8cfa",
+  measurementId: "G-L3NYBWP4Z9"
 };
 
 // Initialize Firebase (Compatibility mode)
-if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
-  firebase.initializeApp(firebaseConfig);
-}
-const db = (firebaseConfig.apiKey !== "YOUR_API_KEY") ? firebase.database() : null;
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 
 // --- Kakao SDK Init ---
 if (window.Kakao && !Kakao.isInitialized()) {
