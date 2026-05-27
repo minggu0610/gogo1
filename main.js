@@ -10,42 +10,41 @@ const firebaseConfig = {
   measurementId: "G-L3NYBWP4Z9"
 };
 
-// Initialize Firebase (Compatibility mode)
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
 // --- Kakao SDK Init ---
 if (window.Kakao && !Kakao.isInitialized()) {
-  Kakao.init('YOUR_KAKAO_JS_KEY'); // 카카오 개발자 센터에서 발급받은 JS 키
+  Kakao.init('YOUR_KAKAO_JS_KEY'); 
 }
 
 // --- Game Data ---
 const gameData = {
   "general": [
-    { id: "gen-1", title: "백수 vs 임원", q: "매달 500만 원 받는 백수<br><span class='vs'>VS</span><br>매달 1500만 원 대기업 임원", a: "500만 원 백수", b: "1500만 원 임원", vA: 0, vB: 0 },
-    { id: "gen-2", title: "라면 vs 치킨", q: "평생 라면만 먹기<br><span class='vs'>VS</span><br>평생 치킨만 먹기", a: "라면", b: "치킨", vA: 0, vB: 0 },
-    { id: "gen-3", title: "과거 vs 미래", q: "10년 전 과거로 가기 (기억 유지)<br><span class='vs'>VS</span><br>10년 후 미래로 가기", a: "과거로 가기", b: "미래로 가기", vA: 0, vB: 0 },
-    { id: "gen-4", title: "추위 vs 더위", q: "평생 에어컨 없는 여름 살기<br><span class='vs'>VS</span><br>평생 히터 없는 겨울 살기", a: "여름 선택", b: "겨울 선택", vA: 0, vB: 0 },
-    { id: "gen-5", title: "잠 vs 음식", q: "평생 잠 안 자도 안 피곤함 (대신 맛 못 느낌)<br><span class='vs'>VS</span><br>평생 맛있는 거 무제한 (대신 하루 12시간 잠)", a: "잠 안 자기", b: "먹기 선택", vA: 0, vB: 0 },
-    { id: "gen-6", title: "환승 vs 잠수", q: "바람 피우고 바로 환승한 애인<br><span class='vs'>VS</span><br>말도 없이 잠수 이별한 애인", a: "환승 애인", b: "잠수 애인", vA: 0, vB: 0 },
-    { id: "gen-7", title: "대머리 vs 털보", q: "머리카락 아예 없는 대머리<br><span class='vs'>VS</span><br>온몸이 털로 덮인 털보", a: "대머리", b: "털보", vA: 0, vB: 0 }
+    { id: "gen-1", title: "백수 vs 임원", q: "매달 500만 원 받는 백수<br><span class='vs'>VS</span><br>매달 1500만 원 대기업 임원", a: "500만 원 백수", b: "1500만 원 임원", vA: 0, vB: 0, likes: 0 },
+    { id: "gen-2", title: "라면 vs 치킨", q: "평생 라면만 먹기<br><span class='vs'>VS</span><br>평생 치킨만 먹기", a: "라면", b: "치킨", vA: 0, vB: 0, likes: 0 },
+    { id: "gen-3", title: "과거 vs 미래", q: "10년 전 과거로 가기 (기억 유지)<br><span class='vs'>VS</span><br>10년 후 미래로 가기", a: "과거로 가기", b: "미래로 가기", vA: 0, vB: 0, likes: 0 },
+    { id: "gen-4", title: "추위 vs 더위", q: "평생 에어컨 없는 여름 살기<br><span class='vs'>VS</span><br>평생 히터 없는 겨울 살기", a: "여름 선택", b: "겨울 선택", vA: 0, vB: 0, likes: 0 },
+    { id: "gen-5", title: "잠 vs 음식", q: "평생 잠 안 자도 안 피곤함 (대신 맛 못 느낌)<br><span class='vs'>VS</span><br>평생 맛있는 거 무제한 (대신 하루 12시간 잠)", a: "잠 안 자기", b: "먹기 선택", vA: 0, vB: 0, likes: 0 },
+    { id: "gen-6", title: "환승 vs 잠수", q: "바람 피우고 바로 환승한 애인<br><span class='vs'>VS</span><br>말도 없이 잠수 이별한 애인", a: "환승 애인", b: "잠수 애인", vA: 0, vB: 0, likes: 0 },
+    { id: "gen-7", title: "대머리 vs 털보", q: "머리카락 아예 없는 대머리<br><span class='vs'>VS</span><br>온몸이 털로 덮인 털보", a: "대머리", b: "털보", vA: 0, vB: 0, likes: 0 }
   ],
   "adult": [
-    { id: "adult-1", title: "불 꺼진 방 vs 불 켜진 방", q: "사랑을 나눌 때<br>불 꺼진 방<br><span class='vs'>VS</span><br>불 켜진 방", a: "불 꺼진 방", b: "불 켜진 방", vA: 0, vB: 0 },
-    { id: "adult-2", title: "낮져밤이 vs 낮이밤져", q: "낮에는 지고 밤에는 이기는 타입<br><span class='vs'>VS</span><br>낮에는 이기고 밤에는 지는 타입", a: "낮져밤이", b: "낮이밤져", vA: 0, vB: 0 },
-    { id: "adult-3", title: "속궁합 vs 성격", q: "속궁합 100점, 성격 0점<br><span class='vs'>VS</span><br>성격 100점, 속궁합 0점", a: "속궁합", b: "성격", vA: 0, vB: 0 }
+    { id: "adult-1", title: "불 꺼진 방 vs 불 켜진 방", q: "사랑을 나눌 때<br>불 꺼진 방<br><span class='vs'>VS</span><br>불 켜진 방", a: "불 꺼진 방", b: "불 켜진 방", vA: 0, vB: 0, likes: 0 },
+    { id: "adult-2", title: "낮져밤이 vs 낮이밤져", q: "낮에는 지고 밤에는 이기는 타입<br><span class='vs'>VS</span><br>낮에는 이기고 밤에는 지는 타입", a: "낮져밤이", b: "낮이밤져", vA: 0, vB: 0, likes: 0 },
+    { id: "adult-3", title: "속궁합 vs 성격", q: "속궁합 100점, 성격 0점<br><span class='vs'>VS</span><br>성격 100점, 속궁합 0점", a: "속궁합", b: "성격", vA: 0, vB: 0, likes: 0 }
   ],
   "couples": [
-    { id: "coup-1", title: "애인 폰 비번 vs 내 폰 비번", q: "애인이 내 폰 비번 알기<br><span class='vs'>VS</span><br>내가 애인 폰 비번 알기", a: "애인이 알기", b: "내가 알기", vA: 0, vB: 0 },
-    { id: "coup-2", title: "깻잎 논쟁", q: "내 절친 깻잎 떼주는 애인<br><span class='vs'>VS</span><br>애인 깻잎 떼주는 내 절친", a: "애인이 떼줌", b: "친구가 떼줌", vA: 0, vB: 0 },
-    { id: "coup-3", title: "남사친/여사친", q: "단둘이 술 마시는 남사친/여사친<br><span class='vs'>VS</span><br>단둘이 1박 2일 여행 가는 남사친/여사친 (방 2개)", a: "술 마시기", b: "여행 가기", vA: 0, vB: 0 }
+    { id: "coup-1", title: "애인 폰 비번 vs 내 폰 비번", q: "애인이 내 폰 비번 알기<br><span class='vs'>VS</span><br>내가 애인 폰 비번 알기", a: "애인이 알기", b: "내가 알기", vA: 0, vB: 0, likes: 0 },
+    { id: "coup-2", title: "깻잎 논쟁", q: "내 절친 깻잎 떼주는 애인<br><span class='vs'>VS</span><br>애인 깻잎 떼주는 내 절친", a: "애인이 떼줌", b: "친구가 떼줌", vA: 0, vB: 0, likes: 0 },
+    { id: "coup-3", title: "남사친/여사친", q: "단둘이 술 마시는 남사친/여사친<br><span class='vs'>VS</span><br>단둘이 1박 2일 여행 가는 남사친/여사친 (방 2개)", a: "술 마시기", b: "여행 가기", vA: 0, vB: 0, likes: 0 }
   ],
   "truth": [
-    { id: "truth-1", title: "전 애인 연락", q: "전 애인에게 연락 온 적 있다<br><span class='vs'>VS</span><br>없다", a: "있다", b: "없다", vA: 0, vB: 0 },
-    { id: "truth-2", title: "비상금", q: "가족 몰래 숨겨둔 비상금이 있다<br><span class='vs'>VS</span><br>없다", a: "있다", b: "없다", vA: 0, vB: 0 }
+    { id: "truth-1", title: "전 애인 연락", q: "전 애인에게 연락 온 적 있다<br><span class='vs'>VS</span><br>없다", a: "있다", b: "없다", vA: 0, vB: 0, likes: 0 },
+    { id: "truth-2", title: "비상금", q: "가족 몰래 숨겨둔 비상금이 있다<br><span class='vs'>VS</span><br>없다", a: "있다", b: "없다", vA: 0, vB: 0, likes: 0 }
   ],
   "muncheol": [
-    { id: "mun-1", title: "롤 문철빵 사연 #1", q: "탑이 라인전 밀렸는데 정글 탓 함<br><span class='vs'>VS</span><br>정글이 갱 안 가서 라인전 망함", a: "탑 잘못", b: "정글 잘못", vA: 0, vB: 0 }
+    { id: "mun-1", title: "롤 문철빵 사연 #1", q: "탑이 라인전 밀렸는데 정글 탓 함<br><span class='vs'>VS</span><br>정글이 갱 안 가서 라인전 망함", a: "탑 잘못", b: "정글 잘못", vA: 0, vB: 0, likes: 0 }
   ]
 };
 
@@ -88,15 +87,35 @@ function renderCategoryBoard(catId) {
   };
   document.getElementById('category-title').textContent = categoryNames[catId];
   const list = document.getElementById('game-list');
-  list.innerHTML = '';
+  list.innerHTML = '로딩 중...';
 
-  const games = gameData[catId] || [];
-  games.forEach(game => {
-    const item = document.createElement('div');
-    item.className = 'game-item';
-    item.textContent = game.title;
-    item.onclick = () => loadGame(game);
-    list.appendChild(item);
+  const games = [...(gameData[catId] || [])];
+  
+  db.ref('votes').once('value', (snapshot) => {
+    const allVotes = snapshot.val() || {};
+    
+    // 인기순 정렬 (참여수 + 좋아요수)
+    games.sort((a, b) => {
+      const statsA = allVotes[a.id] || { vA: 0, vB: 0, likes: 0 };
+      const statsB = allVotes[b.id] || { vA: 0, vB: 0, likes: 0 };
+      const popA = (statsA.vA + statsA.vB) + (statsA.likes || 0);
+      const popB = (statsB.vA + statsB.vB) + (statsB.likes || 0);
+      return popB - popA;
+    });
+
+    list.innerHTML = '';
+    games.forEach(game => {
+      const stats = allVotes[game.id] || { vA: 0, vB: 0, likes: 0 };
+      const total = stats.vA + stats.vB;
+      const item = document.createElement('div');
+      item.className = 'game-item';
+      item.innerHTML = `
+        <span class="item-title">${game.title}</span>
+        <span class="item-popularity">🔥 ${total + (stats.likes || 0)}</span>
+      `;
+      item.onclick = () => loadGame(game);
+      list.appendChild(item);
+    });
   });
 
   showView('category');
@@ -108,25 +127,26 @@ function loadGame(game) {
   document.getElementById('vote-a').querySelector('.option-text').textContent = game.a;
   document.getElementById('vote-b').querySelector('.option-text').textContent = game.b;
   
-  // Reset UI
   document.getElementById('stats-view').classList.add('hidden');
   document.querySelector('.vote-buttons').classList.remove('hidden');
   document.getElementById('bar-a').style.width = '0%';
   document.getElementById('bar-b').style.width = '0%';
+  
+  const likeBtn = document.getElementById('like-btn');
+  likeBtn.classList.remove('liked');
+  if (hasLiked(game.id)) likeBtn.classList.add('liked');
 
-  // 실시간 데이터 동기화 시도 (Firebase 연결된 경우)
-  if (db) {
-    db.ref('votes/' + game.id).on('value', (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        game.vA = data.vA || 0;
-        game.vB = data.vB || 0;
-        if (hasVoted(game.id)) {
-          updateStatsUI(game);
-        }
+  db.ref('votes/' + game.id).on('value', (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+      game.vA = data.vA || 0;
+      game.vB = data.vB || 0;
+      game.likes = data.likes || 0;
+      if (hasVoted(game.id)) {
+        updateStatsUI(game);
       }
-    });
-  }
+    }
+  });
 
   if (hasVoted(game.id)) {
     showStats(game);
@@ -135,6 +155,33 @@ function loadGame(game) {
   showView('game');
   loadDisqus(game.id);
 }
+
+// --- Like Logic ---
+function hasLiked(gameId) {
+  const likedGames = JSON.parse(localStorage.getItem('likedGames') || '{}');
+  return likedGames[gameId];
+}
+
+function markAsLiked(gameId) {
+  const likedGames = JSON.parse(localStorage.getItem('likedGames') || '{}');
+  likedGames[gameId] = true;
+  localStorage.setItem('likedGames', JSON.stringify(likedGames));
+}
+
+document.getElementById('like-btn').addEventListener('click', () => {
+  if (!currentGame) return;
+  if (hasLiked(currentGame.id)) {
+    alert('이미 추천하셨습니다!');
+    return;
+  }
+
+  currentGame.likes = (currentGame.likes || 0) + 1;
+  markAsLiked(currentGame.id);
+  document.getElementById('like-btn').classList.add('liked');
+  
+  db.ref('votes/' + currentGame.id + '/likes').set(currentGame.likes);
+  updateStatsUI(currentGame);
+});
 
 // --- Voting Logic ---
 function hasVoted(gameId) {
@@ -158,13 +205,10 @@ function handleVote(selection) {
   if (selection === 'A') game.vA++;
   else game.vB++;
 
-  // Firebase 업데이트 (연결된 경우)
-  if (db) {
-    db.ref('votes/' + game.id).set({
-      vA: game.vA,
-      vB: game.vB
-    });
-  }
+  db.ref('votes/' + game.id).update({
+    vA: game.vA,
+    vB: game.vB
+  });
 
   markAsVoted(game.id, selection);
   showStats(game, selection);
@@ -185,6 +229,9 @@ function updateStatsUI(game, userSelection = null) {
     pA = Math.round((game.vA / total) * 100);
     pB = 100 - pA;
   }
+
+  document.getElementById('total-voters').textContent = `참여: ${total}명`;
+  document.getElementById('like-count').textContent = game.likes || 0;
 
   setTimeout(() => {
     document.getElementById('percent-a').textContent = `${pA}%`;
@@ -238,10 +285,8 @@ const modal = document.getElementById('form-modal');
 const privacyModal = document.getElementById('privacy-modal');
 const closeModalBtn = document.querySelector('.close-modal');
 const closePrivacyBtn = document.querySelector('.close-privacy');
-
 if (modal) modal.classList.add('hidden');
 if (privacyModal) privacyModal.classList.add('hidden');
-
 document.getElementById('open-partnership').addEventListener('click', () => {
   document.getElementById('modal-title').textContent = "제휴 및 광고 문의";
   modal.classList.remove('hidden');
@@ -251,7 +296,6 @@ document.getElementById('open-submit').addEventListener('click', () => {
   modal.classList.remove('hidden');
 });
 document.getElementById('open-privacy').addEventListener('click', () => privacyModal.classList.remove('hidden'));
-
 closeModalBtn.onclick = () => modal.classList.add('hidden');
 closePrivacyBtn.onclick = () => privacyModal.classList.add('hidden');
 window.onclick = (e) => {
@@ -261,34 +305,10 @@ window.onclick = (e) => {
 
 // --- Share Functions ---
 document.getElementById('share-link').onclick = () => {
-  const url = window.location.href;
-  navigator.clipboard.writeText(url).then(() => alert('링크가 복사되었습니다!'));
+  navigator.clipboard.writeText('https://gogo1-9z8.pages.dev/').then(() => alert('링크가 복사되었습니다!'));
 };
-
 document.getElementById('share-kakao').onclick = () => {
-  if (!window.Kakao || !Kakao.isInitialized()) {
-    alert('카카오톡 공유를 사용하려면 설정이 필요합니다.');
-    return;
-  }
-  Kakao.Share.sendDefault({
-    objectType: 'feed',
-    content: {
-      title: '방구석 솔로몬 - 과몰입 밸런스 게임',
-      description: currentGame ? currentGame.title : '당신의 선택은 무엇인가요?',
-      imageUrl: 'https://gogo1-9z8.pages.dev/og-image.png', // 실제 이미지 URL로 교체 필요
-      link: {
-        mobileWebUrl: window.location.href,
-        webUrl: window.location.href,
-      },
-    },
-    buttons: [{
-      title: '투표하러 가기',
-      link: {
-        mobileWebUrl: window.location.href,
-        webUrl: window.location.href,
-      },
-    }],
-  });
+  alert('카카오톡 SDK 설정이 필요합니다.');
 };
 
 // --- Disqus ---
@@ -311,5 +331,4 @@ function loadDisqus(gameId) {
   }
 }
 
-// --- Init ---
 showView('home');
