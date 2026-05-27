@@ -305,6 +305,55 @@ header {
   color: #333;
 }
 
+.result-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.like-btn {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.like-btn:hover {
+  border-color: var(--accent-b);
+  transform: scale(1.05);
+}
+
+.like-btn.liked {
+  background-color: var(--accent-b);
+  color: #000;
+  border-color: var(--accent-b);
+}
+
+[data-theme="light"] .like-btn {
+  background-color: #eee;
+  color: #333;
+  border-color: #ddd;
+}
+
+.game-item {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-popularity {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
 /* Utils */
 .view { display: block; animation: fadeIn 0.3s ease; }
 .hidden { display: none; }
