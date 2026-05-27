@@ -1,145 +1,160 @@
-// Mock Data
-const games = [
-  {
-    question: "매달 500만 원 받는 백수<br><span class='vs'>VS</span><br>매달 1500만 원 대기업 임원(워라밸 없음)",
-    optionA: "500만 원 백수",
-    optionB: "1500만 원 임원",
-    votesA: 620,
-    votesB: 380,
-    comments: [
-      { user: "익명1", text: "당연히 백수지... 1500 벌어서 언제 써?" },
-      { user: "익명2", text: "임원 찍어보고 은퇴하면 되지 않나?" },
-      { user: "익명3", text: "500이면 충분히 풍족하게 노는데 당연히 A" }
-    ]
-  },
-  {
-    question: "평생 라면만 먹기<br><span class='vs'>VS</span><br>평생 치킨만 먹기",
-    optionA: "라면",
-    optionB: "치킨",
-    votesA: 450,
-    votesB: 550,
-    comments: [
-      { user: "익명4", text: "라면은 종류라도 많지" },
-      { user: "익명5", text: "치킨은 단백질임 ㅡㅡ" }
-    ]
-  }
-];
+// Game Data
+const gameData = {
+  "general": [
+    { id: "gen-1", title: "백수 vs 임원", q: "매달 500만 원 받는 백수<br><span class='vs'>VS</span><br>매달 1500만 원 대기업 임원", a: "500만 원 백수", b: "1500만 원 임원", vA: 620, vB: 380 },
+    { id: "gen-2", title: "라면 vs 치킨", q: "평생 라면만 먹기<br><span class='vs'>VS</span><br>평생 치킨만 먹기", a: "라면", b: "치킨", vA: 450, vB: 550 }
+  ],
+  "adult": [
+    { id: "adult-1", title: "불 꺼진 방 vs 불 켜진 방", q: "사랑을 나눌 때<br>불 꺼진 방<br><span class='vs'>VS</span><br>불 켜진 방", a: "불 꺼진 방", b: "불 켜진 방", vA: 50, vB: 50 }
+  ],
+  "couples": [
+    { id: "coup-1", title: "애인 폰 비번 vs 내 폰 비번", q: "애인이 내 폰 비번 알기<br><span class='vs'>VS</span><br>내가 애인 폰 비번 알기", a: "애인이 알기", b: "내가 알기", vA: 30, vB: 70 }
+  ],
+  "truth": [
+    { id: "truth-1", title: "전 애인 연락", q: "전 애인에게 연락 온 적 있다<br><span class='vs'>VS</span><br>없다", a: "있다", b: "없다", vA: 80, vB: 20 }
+  ],
+  "muncheol": [
+    { id: "mun-1", title: "롤 문철빵 사연 #1", q: "탑이 라인전 밀렸는데 정글 탓 함<br><span class='vs'>VS</span><br>정글이 갱 안 가서 라인전 망함", a: "탑 잘못", b: "정글 잘못", vA: 40, vB: 60 }
+  ]
+};
 
-let currentGameIndex = 0;
+const categoryNames = {
+  "general": "일반 밸런스",
+  "adult": "19금 밸런스",
+  "couples": "연인 밸런스",
+  "truth": "진실게임",
+  "muncheol": "문철빵"
+};
 
-// Elements
-const voteA = document.getElementById('vote-a');
-const voteB = document.getElementById('vote-b');
-const statsView = document.getElementById('stats-view');
-const voteButtons = document.querySelector('.vote-buttons');
-const percentA = document.getElementById('percent-a');
-const percentB = document.getElementById('percent-b');
-const barA = document.getElementById('bar-a');
-const barB = document.getElementById('bar-b');
-const resultText = document.getElementById('result-text');
-const nextGameBtn = document.getElementById('next-game');
-const questionText = document.getElementById('question-text');
-const commentList = document.getElementById('comment-list');
-const commentInput = document.getElementById('comment-input');
-const postCommentBtn = document.getElementById('post-comment');
+// View Management
+const views = {
+  home: document.getElementById('view-home'),
+  category: document.getElementById('view-category'),
+  game: document.getElementById('view-game')
+};
 
-// Modal Elements
-const modal = document.getElementById('form-modal');
-const openPartnership = document.getElementById('open-partnership');
-const openSubmit = document.getElementById('open-submit');
-const closeModal = document.querySelector('.close-modal');
-const modalTitle = document.getElementById('modal-title');
+let currentCategory = null;
+let currentGame = null;
 
-// Functions
-function loadGame(index) {
-  const game = games[index];
-  questionText.innerHTML = game.question;
-  voteA.querySelector('.option-text').textContent = game.optionA;
-  voteB.querySelector('.option-text').textContent = game.optionB;
+function showView(viewName) {
+  Object.values(views).forEach(v => v.classList.add('hidden'));
+  views[viewName].classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+
+// Navigation
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const cat = btn.getAttribute('data-cat');
+    renderCategoryBoard(cat);
+  });
+});
+
+document.getElementById('back-to-home').addEventListener('click', () => showView('home'));
+document.getElementById('back-to-category').addEventListener('click', () => showView('category'));
+document.getElementById('header-logo').addEventListener('click', () => showView('home'));
+
+function renderCategoryBoard(catId) {
+  currentCategory = catId;
+  document.getElementById('category-title').textContent = categoryNames[catId];
+  const list = document.getElementById('game-list');
+  list.innerHTML = '';
+
+  const games = gameData[catId] || [];
+  games.forEach(game => {
+    const item = document.createElement('div');
+    item.className = 'game-item';
+    item.textContent = game.title;
+    item.onclick = () => loadGame(game);
+    list.appendChild(item);
+  });
+
+  showView('category');
+}
+
+function loadGame(game) {
+  currentGame = game;
+  document.getElementById('question-text').innerHTML = game.q;
+  document.getElementById('vote-a').querySelector('.option-text').textContent = game.a;
+  document.getElementById('vote-b').querySelector('.option-text').textContent = game.b;
   
   // Reset UI
-  statsView.classList.add('hidden');
-  voteButtons.classList.remove('hidden');
-  barA.style.width = '0%';
-  barB.style.width = '0%';
-  
-  renderComments(game.comments);
+  document.getElementById('stats-view').classList.add('hidden');
+  document.querySelector('.vote-buttons').classList.remove('hidden');
+  document.getElementById('bar-a').style.width = '0%';
+  document.getElementById('bar-b').style.width = '0%';
+
+  showView('game');
+  loadDisqus(game.id);
 }
 
-function renderComments(comments) {
-  commentList.innerHTML = '';
-  comments.forEach(comment => {
-    const div = document.createElement('div');
-    div.className = 'comment';
-    div.innerHTML = `
-      <div class="comment-user">${comment.user}</div>
-      <div class="comment-text">${comment.text}</div>
-    `;
-    commentList.appendChild(div);
-  });
-  commentList.scrollTop = commentList.scrollHeight;
-}
-
+// Voting
 function handleVote(selection) {
-  const game = games[currentGameIndex];
-  if (selection === 'A') game.votesA++;
-  else game.votesB++;
+  const game = currentGame;
+  if (selection === 'A') game.vA++;
+  else game.vB++;
 
-  const total = game.votesA + game.votesB;
-  const pA = Math.round((game.votesA / total) * 100);
+  const total = game.vA + game.vB;
+  const pA = Math.round((game.vA / total) * 100);
   const pB = 100 - pA;
 
-  // Show stats
-  voteButtons.classList.add('hidden');
-  statsView.classList.remove('hidden');
+  document.querySelector('.vote-buttons').classList.add('hidden');
+  document.getElementById('stats-view').classList.remove('hidden');
   
   setTimeout(() => {
-    percentA.textContent = `${pA}%`;
-    percentB.textContent = `${pB}%`;
-    barA.style.width = `${pA}%`;
-    barB.style.width = `${pB}%`;
+    document.getElementById('percent-a').textContent = `${pA}%`;
+    document.getElementById('percent-b').textContent = `${pB}%`;
+    document.getElementById('bar-a').style.width = `${pA}%`;
+    document.getElementById('bar-b').style.width = `${pB}%`;
+    document.getElementById('label-a').textContent = game.a;
+    document.getElementById('label-b').textContent = game.b;
     
     const userPercent = selection === 'A' ? pA : pB;
-    resultText.textContent = userPercent > 50 
+    document.getElementById('result-text').textContent = userPercent > 50 
       ? `당신은 ${userPercent}%의 대중적인 선택을 했습니다! 😎`
       : `당신은 ${userPercent}%의 힙한 소수파군요! 🤡`;
   }, 100);
 }
 
-// Event Listeners
-voteA.addEventListener('click', () => handleVote('A'));
-voteB.addEventListener('click', () => handleVote('B'));
+document.getElementById('vote-a').addEventListener('click', () => handleVote('A'));
+document.getElementById('vote-b').addEventListener('click', () => handleVote('B'));
 
-nextGameBtn.addEventListener('click', () => {
-  currentGameIndex = (currentGameIndex + 1) % games.length;
-  loadGame(currentGameIndex);
-});
+// Disqus Integration
+function loadDisqus(gameId) {
+  const PAGE_URL = window.location.href.split('#')[0] + '#!game=' + gameId;
+  const PAGE_IDENTIFIER = gameId;
 
-postCommentBtn.addEventListener('click', () => {
-  const text = commentInput.value.trim();
-  if (text) {
-    const newComment = { user: "나 (익명)", text: text };
-    games[currentGameIndex].comments.push(newComment);
-    renderComments(games[currentGameIndex].comments);
-    commentInput.value = '';
+  if (window.DISQUS) {
+    DISQUS.reset({
+      reload: true,
+      config: function () {
+        this.page.url = PAGE_URL;
+        this.page.identifier = PAGE_IDENTIFIER;
+      }
+    });
+  } else {
+    window.disqus_config = function () {
+      this.page.url = PAGE_URL;
+      this.page.identifier = PAGE_IDENTIFIER;
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://gogo-16.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
   }
-});
+}
 
 // Modal Logic
-openPartnership.addEventListener('click', () => {
-  modalTitle.textContent = "제휴 및 광고 문의";
+const modal = document.getElementById('form-modal');
+document.getElementById('open-partnership').addEventListener('click', () => {
+  document.getElementById('modal-title').textContent = "제휴 및 광고 문의";
   modal.classList.remove('hidden');
 });
-
-openSubmit.addEventListener('click', () => {
-  modalTitle.textContent = "사연 제보 및 질문 만들기";
+document.getElementById('open-submit').addEventListener('click', () => {
+  document.getElementById('modal-title').textContent = "사연 제보 및 질문 만들기";
   modal.classList.remove('hidden');
 });
-
-closeModal.addEventListener('click', () => modal.classList.add('hidden'));
-window.addEventListener('click', (e) => {
-  if (e.target === modal) modal.classList.add('hidden');
-});
-
-// Init
-loadGame(0);
+document.querySelector('.close-modal').addEventListener('click', () => modal.classList.add('hidden'));
+window.addEventListener('click', (e) => { if (e.target === modal) modal.classList.add('hidden'); });

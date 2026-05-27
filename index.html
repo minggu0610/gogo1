@@ -12,65 +12,102 @@
 <body>
   <div class="app-container">
     <header>
-      <div class="logo">🔥 과몰입 밸런스</div>
+      <div class="logo" id="header-logo">🔥 과몰입 밸런스</div>
       <nav>
         <button id="open-partnership" class="text-btn">제휴 문의</button>
       </nav>
     </header>
 
     <main id="main-content">
-      <section id="game-card" class="card active">
-        <div class="question-header">당신의 선택은?</div>
-        <h2 id="question-text" class="question">매달 500만 원 받는 백수<br><span class="vs">VS</span><br>매달 1500만 원 대기업 임원(워라밸 없음)</h2>
-        
-        <div class="vote-buttons">
-          <button id="vote-a" class="vote-btn option-a">
-            <span class="option-label">A</span>
-            <span class="option-text">500만 원 백수</span>
+      <!-- 1. Home View (Categories) -->
+      <section id="view-home" class="view active">
+        <h2 class="section-title">카테고리 선택</h2>
+        <div class="category-grid">
+          <button class="cat-btn" data-cat="general">
+            <span class="emoji">⚖️</span>
+            <span class="label">일반 밸런스</span>
           </button>
-          <button id="vote-b" class="vote-btn option-b">
-            <span class="option-label">B</span>
-            <span class="option-text">1500만 원 임원</span>
+          <button class="cat-btn" data-cat="adult">
+            <span class="emoji">🔞</span>
+            <span class="label">19금 밸런스</span>
           </button>
-        </div>
-
-        <div id="stats-view" class="stats-container hidden">
-          <div class="result-message" id="result-text">축하합니다! 당신은 62%의 소수파입니다! 🤡</div>
-          <div class="stat-bar-group">
-            <div class="stat-label">
-              <span>500만 원 백수</span>
-              <span id="percent-a">62%</span>
-            </div>
-            <div class="progress-bg">
-              <div id="bar-a" class="progress-fill bar-a" style="width: 0%"></div>
-            </div>
-          </div>
-          <div class="stat-bar-group">
-            <div class="stat-label">
-              <span>1500만 원 임원</span>
-              <span id="percent-b">38%</span>
-            </div>
-            <div class="progress-bg">
-              <div id="bar-b" class="progress-fill bar-b" style="width: 0%"></div>
-            </div>
-          </div>
-          <button id="next-game" class="next-btn">다음 질문 보기 👉</button>
+          <button class="cat-btn" data-cat="couples">
+            <span class="emoji">💕</span>
+            <span class="label">연인 밸런스</span>
+          </button>
+          <button class="cat-btn" data-cat="truth">
+            <span class="emoji">🤫</span>
+            <span class="label">진실게임</span>
+          </button>
+          <button class="cat-btn" data-cat="muncheol">
+            <span class="emoji">👨‍⚖️</span>
+            <span class="label">문철빵</span>
+          </button>
         </div>
       </section>
 
-      <section id="discussion" class="discussion-section">
-        <h3>💬 실시간 익명 토론</h3>
-        <div id="comment-list" class="comment-list">
-          <!-- Comments will be injected here -->
+      <!-- 2. Category Board View (Game List) -->
+      <section id="view-category" class="view hidden">
+        <div class="view-header">
+          <button id="back-to-home" class="back-btn">⬅️ 뒤로가기</button>
+          <h2 id="category-title" class="section-title">일반 밸런스</h2>
         </div>
-        <div class="comment-input-area">
-          <input type="text" id="comment-input" placeholder="익명으로 한마디 하기...">
-          <button id="post-comment">등록</button>
+        <div id="game-list" class="game-list">
+          <!-- Game list items will be injected here -->
+        </div>
+      </section>
+
+      <!-- 3. Game Play View -->
+      <section id="view-game" class="view hidden">
+        <div class="view-header">
+          <button id="back-to-category" class="back-btn">⬅️ 목록으로</button>
+        </div>
+        <div class="card">
+          <div class="question-header">당신의 선택은?</div>
+          <h2 id="question-text" class="question">질문 로딩 중...</h2>
+          
+          <div class="vote-buttons">
+            <button id="vote-a" class="vote-btn option-a">
+              <span class="option-label">A</span>
+              <span class="option-text">옵션 A</span>
+            </button>
+            <button id="vote-b" class="vote-btn option-b">
+              <span class="option-label">B</span>
+              <span class="option-text">옵션 B</span>
+            </button>
+          </div>
+
+          <div id="stats-view" class="stats-container hidden">
+            <div class="result-message" id="result-text">통계 로딩 중...</div>
+            <div class="stat-bar-group">
+              <div class="stat-label">
+                <span id="label-a">옵션 A</span>
+                <span id="percent-a">0%</span>
+              </div>
+              <div class="progress-bg">
+                <div id="bar-a" class="progress-fill bar-a" style="width: 0%"></div>
+              </div>
+            </div>
+            <div class="stat-bar-group">
+              <div class="stat-label">
+                <span id="label-b">옵션 B</span>
+                <span id="percent-b">0%</span>
+              </div>
+              <div class="progress-bg">
+                <div id="bar-b" class="progress-fill bar-b" style="width: 0%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Disqus Section -->
+        <div class="disqus-section">
+          <div id="disqus_thread"></div>
         </div>
       </section>
 
       <section class="ugc-section">
-        <button id="open-submit" class="ugc-btn">🙋‍♂️ 나도 질문/사연 올리기 (문철빵 가능)</button>
+        <button id="open-submit" class="ugc-btn">🙋‍♂️ 나도 질문/사연 올리기</button>
       </section>
     </main>
 
