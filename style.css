@@ -354,6 +354,44 @@ header {
   font-weight: 400;
 }
 
+.tag-container {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 10px 0;
+  margin-bottom: 15px;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.tag-container::-webkit-scrollbar { display: none; }
+
+.tag-pill {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tag-pill.active {
+  background-color: var(--accent-b);
+  color: #000;
+  border-color: var(--accent-b);
+  font-weight: 700;
+}
+
+.game-tag {
+  color: var(--accent-a);
+  font-size: 0.8rem;
+  margin-left: 10px;
+  font-weight: 700;
+}
+
 /* Utils */
 .view { display: block; animation: fadeIn 0.3s ease; }
 .hidden { display: none; }
