@@ -1,35 +1,107 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
+  <title>과몰입 밸런스 게임 - 도파민 뿜뿜 익명 토론</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
   <link href='/style.css' rel='stylesheet'>
 </head>
 <body>
-  <div class="container">
-    <h1>Hello, world!</h1>
-    <button onclick="console.log('hello');">Press me</button>
+  <div class="app-container">
+    <header>
+      <div class="logo">🔥 과몰입 밸런스</div>
+      <nav>
+        <button id="open-partnership" class="text-btn">제휴 문의</button>
+      </nav>
+    </header>
 
-    <section id="partnership">
-      <h2>제휴 문의</h2>
-      <form action="https://formspree.io/f/mlgvagkd" method="POST">
-        <div class="form-group">
-          <label for="name">이름/업체명</label>
-          <input type="text" id="name" name="name" required placeholder="성함 또는 업체명을 입력해주세요.">
+    <main id="main-content">
+      <section id="game-card" class="card active">
+        <div class="question-header">당신의 선택은?</div>
+        <h2 id="question-text" class="question">매달 500만 원 받는 백수<br><span class="vs">VS</span><br>매달 1500만 원 대기업 임원(워라밸 없음)</h2>
+        
+        <div class="vote-buttons">
+          <button id="vote-a" class="vote-btn option-a">
+            <span class="option-label">A</span>
+            <span class="option-text">500만 원 백수</span>
+          </button>
+          <button id="vote-b" class="vote-btn option-b">
+            <span class="option-label">B</span>
+            <span class="option-text">1500만 원 임원</span>
+          </button>
         </div>
-        <div class="form-group">
-          <label for="email">이메일 주소</label>
-          <input type="email" id="email" name="_replyto" required placeholder="답변받으실 이메일을 입력해주세요.">
+
+        <div id="stats-view" class="stats-container hidden">
+          <div class="result-message" id="result-text">축하합니다! 당신은 62%의 소수파입니다! 🤡</div>
+          <div class="stat-bar-group">
+            <div class="stat-label">
+              <span>500만 원 백수</span>
+              <span id="percent-a">62%</span>
+            </div>
+            <div class="progress-bg">
+              <div id="bar-a" class="progress-fill bar-a" style="width: 0%"></div>
+            </div>
+          </div>
+          <div class="stat-bar-group">
+            <div class="stat-label">
+              <span>1500만 원 임원</span>
+              <span id="percent-b">38%</span>
+            </div>
+            <div class="progress-bg">
+              <div id="bar-b" class="progress-fill bar-b" style="width: 0%"></div>
+            </div>
+          </div>
+          <button id="next-game" class="next-btn">다음 질문 보기 👉</button>
         </div>
-        <div class="form-group">
-          <label for="message">문의 내용</label>
-          <textarea id="message" name="message" required placeholder="문의하실 내용을 상세히 적어주세요."></textarea>
+      </section>
+
+      <section id="discussion" class="discussion-section">
+        <h3>💬 실시간 익명 토론</h3>
+        <div id="comment-list" class="comment-list">
+          <!-- Comments will be injected here -->
         </div>
-        <button type="submit" class="submit-btn">문의 보내기</button>
-      </form>
-    </section>
+        <div class="comment-input-area">
+          <input type="text" id="comment-input" placeholder="익명으로 한마디 하기...">
+          <button id="post-comment">등록</button>
+        </div>
+      </section>
+
+      <section class="ugc-section">
+        <button id="open-submit" class="ugc-btn">🙋‍♂️ 나도 질문/사연 올리기 (문철빵 가능)</button>
+      </section>
+    </main>
+
+    <!-- Modal for Partnership/Submit -->
+    <div id="form-modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2 id="modal-title">문의/제보하기</h2>
+        <form action="https://formspree.io/f/mlgvagkd" method="POST" id="partnership-form">
+          <div class="form-group">
+            <label for="name">이름/닉네임</label>
+            <input type="text" id="name" name="name" required placeholder="성함 또는 닉네임을 입력해주세요.">
+          </div>
+          <div class="form-group">
+            <label for="email">이메일 주소</label>
+            <input type="email" id="email" name="_replyto" required placeholder="답변받으실 이메일을 입력해주세요.">
+          </div>
+          <div class="form-group">
+            <label for="message">내용</label>
+            <textarea id="message" name="message" required placeholder="제휴 문의 또는 밸런스 게임 사연을 상세히 적어주세요."></textarea>
+          </div>
+          <button type="submit" class="submit-btn">문의 보내기</button>
+        </form>
+      </div>
+    </div>
   </div>
+
+  <footer>
+    <p>&copy; 2026 과몰입 밸런스. All rights reserved.</p>
+  </footer>
+
   <script defer type="text/javascript" src="/main.js"></script>
 </body>
 </html>
