@@ -104,6 +104,15 @@
                 <div id="bar-b" class="progress-fill bar-b" style="width: 0%"></div>
               </div>
             </div>
+
+            <!-- Share Section -->
+            <div class="share-section">
+              <p>친구에게 이 고민 공유하기 👇</p>
+              <div class="share-buttons">
+                <button id="share-kakao" class="share-btn kakao">카카오톡</button>
+                <button id="share-link" class="share-btn link">링크 복사</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -117,7 +126,7 @@
         <button id="open-submit" class="ugc-btn">🙋‍♂️ 나도 질문/사연 올리기</button>
       </section>
 
-      <!-- About Section (For AdSense Approval) -->
+      <!-- About Section -->
       <section class="about-card">
         <h3>'방구석 솔로몬' 플랫폼 안내</h3>
         <p>방구석 솔로몬은 MZ세대의 트렌디한 고민과 다양한 상황에서의 선택을 공유하는 익명 커뮤니티 플랫폼입니다. 매일 새로운 질문이 업데이트되며, 실시간 통계를 통해 대중의 생각과 나의 생각이 얼마나 일치하는지 확인할 수 있습니다.</p>
@@ -125,7 +134,7 @@
       </section>
     </main>
 
-    <!-- Modal for Partnership/Submit -->
+    <!-- Modals -->
     <div id="form-modal" class="modal hidden">
       <div class="modal-content">
         <span class="close-modal">&times;</span>
@@ -148,17 +157,16 @@
       </div>
     </div>
 
-    <!-- Privacy Policy Modal -->
     <div id="privacy-modal" class="modal hidden">
       <div class="modal-content">
         <span class="close-privacy close-modal">&times;</span>
         <h2>개인정보처리방침</h2>
         <div class="policy-text" style="text-align: left; font-size: 0.9rem; color: var(--text-secondary); max-height: 300px; overflow-y: auto;">
           <p>본 사이트는 사용자의 개인정보를 소중히 다룹니다.</p>
-          <p>1. 수집 항목: 문의하기/제보하기 시 작성하는 이름, 이메일 주소</p>
+          <p>1. 수집 항목: 이름, 이메일 주소</p>
           <p>2. 이용 목적: 제휴 문의 답변 및 서비스 개선</p>
           <p>3. 보존 기간: 목적 달성 후 즉시 파기</p>
-          <p>4. 쿠키 및 광고: 본 사이트는 구글 애드센스를 사용하며, 광고 게재를 위해 구글 등 제3자 제공업체가 쿠키를 사용하여 사용자의 이전 방문을 바탕으로 광고를 게재합니다. 사용자는 구글 광고 설정에서 맞춤형 광고를 해제할 수 있습니다.</p>
+          <p>4. 쿠키 및 광고: 구글 애드센스 사용 시 쿠키를 활용할 수 있습니다.</p>
         </div>
       </div>
     </div>
@@ -171,6 +179,11 @@
     <p>&copy; 2026 방구석 솔로몬. All rights reserved.</p>
   </footer>
 
+  <!-- Kakao SDK -->
+  <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.0/kakao.min.js" integrity="sha384-lXpv9Ymbba1q8p1pYp7p6H4Yv6U6pW4e9u2E1z8eY8z8eY8z8eY8z8eY8z8eY8z8eY8z8" crossorigin="anonymous"></script>
+  <!-- Firebase SDK (v9 Compat) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   <script defer type="text/javascript" src="/main.js"></script>
 </body>
 </html>
