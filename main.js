@@ -13,11 +13,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-// --- Kakao SDK Init ---
-if (window.Kakao && !Kakao.isInitialized()) {
-  Kakao.init('YOUR_KAKAO_JS_KEY'); 
-}
-
 // --- Game Data ---
 const gameData = {
   "general": [
@@ -132,22 +127,17 @@ const gameData = {
     { id: "gen-100", tag: "#극단적/마라맛", title: "질문 100개 제작 vs 질문 100개 답변", q: "밸런스 게임 질문 100개 만들기<br><span class='vs'>VS</span><br>밸런스 게임 100개 연속으로 대답하기", a: "100개 제작", b: "100개 답변", vA: 0, vB: 0, likes: 0 }
   ],
   "adult": [
-    { id: "adult-1", title: "불 꺼진 방 vs 불 켜진 방", q: "사랑을 나눌 때<br>불 꺼진 방<br><span class='vs'>VS</span><br>불 켜진 방", a: "불 꺼진 방", b: "불 켜진 방", vA: 0, vB: 0, likes: 0 },
-    { id: "adult-2", title: "낮져밤이 vs 낮이밤져", q: "낮에는 지고 밤에는 이기는 타입<br><span class='vs'>VS</span><br>낮에는 이기고 밤에는 지는 타입", a: "낮져밤이", b: "낮이밤져", vA: 0, vB: 0, likes: 0 },
-    { id: "adult-3", title: "속궁합 vs 성격", q: "속궁합 100점, 성격 0점<br><span class='vs'>VS</span><br>성격 100점, 속궁합 0점", a: "속궁합", b: "성격", vA: 0, vB: 0, likes: 0 }
+    { id: "adult-m-1", tag: "#남자/성인", title: "불 꺼진 방 vs 불 켜진 방", q: "사랑을 나눌 때<br>불 꺼진 방<br><span class='vs'>VS</span><br>불 켜진 방", a: "불 꺼진 방", b: "불 켜진 방", vA: 0, vB: 0, likes: 0 },
+    { id: "adult-f-1", tag: "#여자/성인", title: "밤져낮이 vs 밤이낮져", q: "본인의 취향은?<br>밤져낮이<br><span class='vs'>VS</span><br>밤이낮져", a: "밤져낮이", b: "밤이낮져", vA: 0, vB: 0, likes: 0 }
   ],
   "couples": [
-    { id: "coup-1", title: "애인 폰 비번 vs 내 폰 비번", q: "애인이 내 폰 비번 알기<br><span class='vs'>VS</span><br>내가 애인 폰 비번 알기", a: "애인이 알기", b: "내가 알기", vA: 0, vB: 0, likes: 0 },
-    { id: "coup-2", title: "깻잎 논쟁", q: "내 절친 깻잎 떼주는 애인<br><span class='vs'>VS</span><br>애인 깻잎 떼주는 내 절친", a: "애인이 떼줌", b: "친구가 떼줌", vA: 0, vB: 0, likes: 0 },
-    { id: "coup-3", title: "남사친/여사친", q: "단둘이 술 마시는 남사친/여사친<br><span class='vs'>VS</span><br>단둘이 1박 2일 여행 가는 남사친/여사친 (방 2개)", a: "술 마시기", b: "여행 가기", vA: 0, vB: 0, likes: 0 }
+    { id: "coup-1", tag: "#연인", title: "애인 폰 비번 vs 내 폰 비번", q: "애인이 내 폰 비번 알기<br><span class='vs'>VS</span><br>내가 애인 폰 비번 알기", a: "애인이 알기", b: "내가 알기", vA: 0, vB: 0, likes: 0 },
+    { id: "coup-2", tag: "#연인", title: "깻잎 논쟁", q: "내 절친 깻잎 떼주는 애인<br><span class='vs'>VS</span><br>애인 깻잎 떼주는 내 절친", a: "애인이 떼줌", b: "친구가 떼줌", vA: 0, vB: 0, likes: 0 }
   ],
   "truth": [
-    { id: "truth-1", title: "전 애인 연락", q: "전 애인에게 연락 온 적 있다<br><span class='vs'>VS</span><br>없다", a: "있다", b: "없다", vA: 0, vB: 0, likes: 0 },
-    { id: "truth-2", title: "비상금", q: "가족 몰래 숨겨둔 비상금이 있다<br><span class='vs'>VS</span><br>없다", a: "있다", b: "없다", vA: 0, vB: 0, likes: 0 }
+    { id: "truth-1", tag: "#진실", title: "전 애인 연락", q: "전 애인에게 연락 온 적 있다<br><span class='vs'>VS</span><br>없다", a: "있다", b: "없다", vA: 0, vB: 0, likes: 0 }
   ],
-  "muncheol": [
-    { id: "mun-1", title: "롤 문철빵 사연 #1", q: "탑이 라인전 밀렸는데 정글 탓 함<br><span class='vs'>VS</span><br>정글이 갱 안 가서 라인전 망함", a: "탑 잘못", b: "정글 잘못", vA: 0, vB: 0, likes: 0 }
-  ]
+  "muncheol": []
 };
 
 // --- View Management ---
@@ -171,6 +161,10 @@ function showView(viewName) {
 document.querySelectorAll('.cat-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const cat = btn.getAttribute('data-cat');
+    if (cat === "muncheol") {
+      alert("시시비비 코너는 아직 준비 중입니다! 👨‍⚖️");
+      return;
+    }
     currentTag = "전체";
     renderCategoryBoard(cat);
   });
@@ -187,7 +181,7 @@ function renderCategoryBoard(catId) {
     "adult": "19금 밸런스",
     "couples": "연인 밸런스",
     "truth": "진실게임",
-    "muncheol": "문철빵"
+    "muncheol": "시시비비"
   };
   document.getElementById('category-title').textContent = categoryNames[catId];
   const list = document.getElementById('game-list');
@@ -197,27 +191,25 @@ function renderCategoryBoard(catId) {
 
   const games = [...(gameData[catId] || [])];
   
-  // 태그 목록 추출 (일반 밸런스인 경우)
-  if (catId === "general") {
-    const tags = ["전체", ...new Set(games.map(g => g.tag).filter(t => t))];
-    tags.forEach(tag => {
-      const pill = document.createElement('div');
-      pill.className = `tag-pill ${currentTag === tag ? 'active' : ''}`;
-      pill.textContent = tag;
-      pill.onclick = () => {
-        currentTag = tag;
-        renderCategoryBoard(catId);
-      };
-      tagContainer.appendChild(pill);
-    });
-  }
+  // 태그 목록 추출
+  const tags = ["전체", ...new Set(games.map(g => g.tag).filter(t => t))];
+  tags.forEach(tag => {
+    const pill = document.createElement('div');
+    pill.className = `tag-pill ${currentTag === tag ? 'active' : ''}`;
+    pill.textContent = tag;
+    pill.onclick = () => {
+      currentTag = tag;
+      renderCategoryBoard(catId);
+    };
+    tagContainer.appendChild(pill);
+  });
 
   db.ref('votes').once('value', (snapshot) => {
     const allVotes = snapshot.val() || {};
     
     // 태그 필터링
     let filteredGames = games;
-    if (catId === "general" && currentTag !== "전체") {
+    if (currentTag !== "전체") {
       filteredGames = games.filter(g => g.tag === currentTag);
     }
 
@@ -238,7 +230,6 @@ function renderCategoryBoard(catId) {
       item.className = 'game-item';
       item.innerHTML = `
         <div class="item-info">
-          <span class="item-tag">${game.tag || ''}</span>
           <span class="item-title">${game.title}</span>
         </div>
         <span class="item-popularity">🔥 ${total + (stats.likes || 0)}</span>
@@ -438,9 +429,6 @@ window.onclick = (e) => {
 document.getElementById('share-link').onclick = () => {
   const url = window.location.href;
   navigator.clipboard.writeText(url).then(() => alert('링크가 복사되었습니다!'));
-};
-document.getElementById('share-kakao').onclick = () => {
-  alert('카카오톡 SDK 설정이 필요합니다.');
 };
 
 // --- Disqus ---

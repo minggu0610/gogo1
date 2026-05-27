@@ -357,15 +357,10 @@ header {
 .tag-container {
   display: flex;
   gap: 8px;
-  overflow-x: auto;
+  flex-wrap: wrap;
   padding: 10px 0;
   margin-bottom: 15px;
-  white-space: nowrap;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
-
-.tag-container::-webkit-scrollbar { display: none; }
 
 .tag-pill {
   background-color: var(--card-bg);
@@ -385,11 +380,24 @@ header {
   font-weight: 700;
 }
 
-.game-tag {
-  color: var(--accent-a);
+.game-tag-small {
+  display: inline-block;
+  color: var(--text-secondary);
   font-size: 0.8rem;
-  margin-left: 10px;
-  font-weight: 700;
+  margin-top: 15px;
+  padding: 4px 10px;
+  background-color: rgba(255,255,255,0.05);
+  border-radius: 4px;
+}
+
+[data-theme="light"] .game-tag-small {
+  background-color: rgba(0,0,0,0.05);
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 /* Utils */
