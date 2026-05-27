@@ -84,16 +84,42 @@ function loadGame(game) {
   document.getElementById('bar-a').style.width = '0%';
   document.getElementById('bar-b').style.width = '0%';
 
+  // Check if already voted
+  if (hasVoted(game.id)) {
+    showStats(game);
+  }
+
   showView('game');
   loadDisqus(game.id);
 }
 
-// Voting
+// Voting Logic
+function hasVoted(gameId) {
+  const votedGames = JSON.parse(localStorage.getItem('votedGames') || '{}');
+  return votedGames[gameId];
+}
+
+function markAsVoted(gameId, selection) {
+  const votedGames = JSON.parse(localStorage.getItem('votedGames') || '{}');
+  votedGames[gameId] = selection;
+  localStorage.setItem('votedGames', JSON.stringify(votedGames));
+}
+
 function handleVote(selection) {
+  if (hasVoted(currentGame.id)) {
+    alert('이미 투표하셨습니다!');
+    return;
+  }
+
   const game = currentGame;
   if (selection === 'A') game.vA++;
   else game.vB++;
 
+  markAsVoted(game.id, selection);
+  showStats(game, selection);
+}
+
+function showStats(game, userSelection = null) {
   const total = game.vA + game.vB;
   const pA = Math.round((game.vA / total) * 100);
   const pB = 100 - pA;
@@ -101,6 +127,7 @@ function handleVote(selection) {
   document.querySelector('.vote-buttons').classList.add('hidden');
   document.getElementById('stats-view').classList.remove('hidden');
   
+  // Update UI with animation
   setTimeout(() => {
     document.getElementById('percent-a').textContent = `${pA}%`;
     document.getElementById('percent-b').textContent = `${pB}%`;
@@ -109,10 +136,15 @@ function handleVote(selection) {
     document.getElementById('label-a').textContent = game.a;
     document.getElementById('label-b').textContent = game.b;
     
-    const userPercent = selection === 'A' ? pA : pB;
-    document.getElementById('result-text').textContent = userPercent > 50 
-      ? `당신은 ${userPercent}%의 대중적인 선택을 했습니다! 😎`
-      : `당신은 ${userPercent}%의 힙한 소수파군요! 🤡`;
+    if (userSelection) {
+      const userPercent = userSelection === 'A' ? pA : pB;
+      document.getElementById('result-text').textContent = userPercent > 50 
+        ? `당신은 ${userPercent}%의 대중적인 선택을 했습니다! 😎`
+        : `당신은 ${userPercent}%의 힙한 소수파군요! 🤡`;
+    } else {
+      const savedSelection = hasVoted(game.id);
+      document.getElementById('result-text').textContent = `이미 투표 완료! (나의 선택: ${savedSelection === 'A' ? game.a : game.b})`;
+    }
   }, 100);
 }
 
