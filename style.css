@@ -19,6 +19,34 @@
   --border-color: #dddddd;
 }
 
+[data-theme="light"] .theme-btn:hover,
+[data-theme="light"] .text-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+[data-theme="light"] .cat-btn {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .cat-btn:hover {
+  background-color: #f9f9f9;
+  border-color: var(--accent-a);
+}
+
+[data-theme="light"] .game-item {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .back-btn {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+[data-theme="light"] .back-btn:hover {
+  background-color: #d0d0d0;
+}
+
 body {
   margin: 0;
   padding: 0;
