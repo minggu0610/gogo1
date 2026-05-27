@@ -174,6 +174,11 @@ themeToggle.addEventListener('click', () => {
 const modal = document.getElementById('form-modal');
 const closeModalBtn = document.querySelector('.close-modal');
 
+// Ensure modal is hidden on load
+if (modal) {
+  modal.classList.add('hidden');
+}
+
 if (modal && closeModalBtn) {
   document.getElementById('open-partnership').addEventListener('click', () => {
     document.getElementById('modal-title').textContent = "제휴 및 광고 문의";
