@@ -6,8 +6,17 @@
   --accent-a: #ff0055;
   --accent-b: #00f2ff;
   --neon-green: #39ff14;
+  --border-color: #333;
   --font-main: 'Noto Sans KR', sans-serif;
   --font-logo: 'Black Han Sans', sans-serif;
+}
+
+[data-theme="light"] {
+  --bg-color: #f4f7f6;
+  --card-bg: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #666666;
+  --border-color: #dddddd;
 }
 
 body {
@@ -17,6 +26,16 @@ body {
   color: var(--text-primary);
   font-family: var(--font-main);
   line-height: 1.6;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.theme-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-right: 10px;
+  vertical-align: middle;
 }
 
 .app-container {
@@ -33,7 +52,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .logo {
