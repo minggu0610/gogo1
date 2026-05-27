@@ -247,6 +247,17 @@ header {
   line-height: 1.7;
 }
 
+[data-theme="light"] .ugc-btn {
+  background-color: #ffffff;
+  border: 2px dashed var(--accent-b);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .ugc-btn:hover {
+  background-color: #f0faff;
+  border-style: solid;
+}
+
 /* Utils */
 .view { display: block; animation: fadeIn 0.3s ease; }
 .hidden { display: none; }
