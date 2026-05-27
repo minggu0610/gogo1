@@ -179,6 +179,39 @@ header {
   margin-top: 20px;
 }
 
+.intro-section {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.section-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+
+.about-card {
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  padding: 25px;
+  margin-top: 30px;
+  text-align: left;
+  border: 1px solid var(--border-color);
+}
+
+.about-card h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: var(--accent-b);
+}
+
+.about-card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
 /* Utils */
 .view { display: block; animation: fadeIn 0.3s ease; }
 .hidden { display: none; }

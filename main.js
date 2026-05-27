@@ -172,12 +172,13 @@ themeToggle.addEventListener('click', () => {
 
 // Modal Logic
 const modal = document.getElementById('form-modal');
+const privacyModal = document.getElementById('privacy-modal');
 const closeModalBtn = document.querySelector('.close-modal');
+const closePrivacyBtn = document.querySelector('.close-privacy');
 
-// Ensure modal is hidden on load
-if (modal) {
-  modal.classList.add('hidden');
-}
+// Ensure modals are hidden on load
+if (modal) modal.classList.add('hidden');
+if (privacyModal) privacyModal.classList.add('hidden');
 
 if (modal && closeModalBtn) {
   document.getElementById('open-partnership').addEventListener('click', () => {
@@ -190,13 +191,20 @@ if (modal && closeModalBtn) {
     modal.classList.remove('hidden');
   });
 
+  document.getElementById('open-privacy').addEventListener('click', () => {
+    privacyModal.classList.remove('hidden');
+  });
+
   closeModalBtn.addEventListener('click', () => {
     modal.classList.add('hidden');
   });
 
+  closePrivacyBtn.addEventListener('click', () => {
+    privacyModal.classList.add('hidden');
+  });
+
   window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.classList.add('hidden');
-    }
+    if (e.target === modal) modal.classList.add('hidden');
+    if (e.target === privacyModal) privacyModal.classList.add('hidden');
   });
 }

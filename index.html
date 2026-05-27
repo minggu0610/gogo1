@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>과몰입 밸런스 게임 - 도파민 뿜뿜 익명 토론</title>
+  <title>과몰입 밸런스 게임 - 1020 익명 토론 및 밸런스 게임 플랫폼</title>
+  <meta name="description" content="1020 세대를 위한 실시간 익명 토론 및 도파민 자극 밸런스 게임 플랫폼입니다. 다양한 카테고리의 밸런스 게임과 문철빵 사연을 확인하고 투표에 참여해보세요.">
+  <meta name="keywords" content="밸런스게임, 익명토론, 10대, 20대, 도파민, 문철빵, 심리테스트, 진실게임">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
@@ -23,7 +25,10 @@
     <main id="main-content">
       <!-- 1. Home View (Categories) -->
       <section id="view-home" class="view active">
-        <h2 class="section-title">카테고리 선택</h2>
+        <div class="intro-section">
+          <h2 class="section-title">매일 업데이트되는 새로운 고민</h2>
+          <p class="section-desc">세상의 모든 쓸데없는 고민, 여기서 종결하세요. 당신의 선택이 트렌드가 됩니다.</p>
+        </div>
         <div class="category-grid">
           <button class="cat-btn" data-cat="general">
             <span class="emoji">⚖️</span>
@@ -111,6 +116,13 @@
       <section class="ugc-section">
         <button id="open-submit" class="ugc-btn">🙋‍♂️ 나도 질문/사연 올리기</button>
       </section>
+
+      <!-- About Section (For AdSense Approval) -->
+      <section class="about-card">
+        <h3>'과몰입 밸런스' 플랫폼 안내</h3>
+        <p>과몰입 밸런스는 MZ세대의 트렌디한 고민과 다양한 상황에서의 선택을 공유하는 익명 커뮤니티 플랫폼입니다. 매일 새로운 질문이 업데이트되며, 실시간 통계를 통해 대중의 생각과 나의 생각이 얼마나 일치하는지 확인할 수 있습니다.</p>
+        <p>단순한 선택을 넘어, Disqus를 통한 익명 토론 시스템으로 깊이 있는(혹은 아주 가벼운) 소통을 지향합니다.</p>
+      </section>
     </main>
 
     <!-- Modal for Partnership/Submit -->
@@ -135,9 +147,27 @@
         </form>
       </div>
     </div>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacy-modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-privacy close-modal">&times;</span>
+        <h2>개인정보처리방침</h2>
+        <div class="policy-text" style="text-align: left; font-size: 0.9rem; color: var(--text-secondary); max-height: 300px; overflow-y: auto;">
+          <p>본 사이트는 사용자의 개인정보를 소중히 다룹니다.</p>
+          <p>1. 수집 항목: 문의하기/제보하기 시 작성하는 이름, 이메일 주소</p>
+          <p>2. 이용 목적: 제휴 문의 답변 및 서비스 개선</p>
+          <p>3. 보존 기간: 목적 달성 후 즉시 파기</p>
+          <p>4. 쿠키 및 광고: 본 사이트는 구글 애드센스를 사용하며, 광고 게재를 위해 구글 등 제3자 제공업체가 쿠키를 사용하여 사용자의 이전 방문을 바탕으로 광고를 게재합니다. 사용자는 구글 광고 설정에서 맞춤형 광고를 해제할 수 있습니다.</p>
+        </div>
+      </div>
+    </div>
   </div>
 
   <footer>
+    <div class="footer-links" style="margin-bottom: 10px;">
+      <button id="open-privacy" class="text-btn">개인정보처리방침</button>
+    </div>
     <p>&copy; 2026 과몰입 밸런스. All rights reserved.</p>
   </footer>
 
