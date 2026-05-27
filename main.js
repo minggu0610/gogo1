@@ -148,13 +148,26 @@ function loadDisqus(gameId) {
 
 // Modal Logic
 const modal = document.getElementById('form-modal');
-document.getElementById('open-partnership').addEventListener('click', () => {
-  document.getElementById('modal-title').textContent = "제휴 및 광고 문의";
-  modal.classList.remove('hidden');
-});
-document.getElementById('open-submit').addEventListener('click', () => {
-  document.getElementById('modal-title').textContent = "사연 제보 및 질문 만들기";
-  modal.classList.remove('hidden');
-});
-document.querySelector('.close-modal').addEventListener('click', () => modal.classList.add('hidden'));
-window.addEventListener('click', (e) => { if (e.target === modal) modal.classList.add('hidden'); });
+const closeModalBtn = document.querySelector('.close-modal');
+
+if (modal && closeModalBtn) {
+  document.getElementById('open-partnership').addEventListener('click', () => {
+    document.getElementById('modal-title').textContent = "제휴 및 광고 문의";
+    modal.classList.remove('hidden');
+  });
+
+  document.getElementById('open-submit').addEventListener('click', () => {
+    document.getElementById('modal-title').textContent = "사연 제보 및 질문 만들기";
+    modal.classList.remove('hidden');
+  });
+
+  closeModalBtn.addEventListener('click', () => {
+    modal.classList.add('hidden');
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.add('hidden');
+    }
+  });
+}
