@@ -153,7 +153,7 @@ document.getElementById('vote-b').addEventListener('click', () => handleVote('B'
 
 // Disqus Integration
 function loadDisqus(gameId) {
-  const PAGE_URL = window.location.href.split('#')[0] + '#!game=' + gameId;
+  const PAGE_URL = 'https://gogo1-9z8.pages.dev/#!game=' + gameId;
   const PAGE_IDENTIFIER = gameId;
 
   if (window.DISQUS) {
