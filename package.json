@@ -1,0 +1,17 @@
+{
+  "name": "nest-escape-monorepo",
+  "private": true,
+  "scripts": {
+    "dev:frontend": "cd nest-escape && npm run dev",
+    "dev:backend": "cd server && npx wrangler dev",
+    "dev": "npm-run-all --parallel dev:*",
+    "build": "cd nest-escape && npm install && npm run build",
+    "deploy:backend": "cd server && npx wrangler deploy --non-interactive",
+    "deploy:frontend": "cd nest-escape && npx wrangler pages deploy dist --project-name=nest-escape",
+    "deploy": "npm run build && npm run deploy:backend && npm run deploy:frontend"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "wrangler": "^3.0.0"
+  }
+}

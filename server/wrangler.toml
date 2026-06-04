@@ -1,0 +1,7 @@
+name = "nest-escape-api"
+main = "index.js"
+compatibility_date = "2026-06-04"
+
+[vars]
+# LH_API_KEY는 wrangler secret put LH_API_KEY로 따로 설정해야 보안상 안전합니다.
+LH_API_KEY = "f88fe2d8b348d0dea6cdcb334718c73bcc63afdfc10d8d6f511071e98f7a83cc"
