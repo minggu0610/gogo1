@@ -3,5 +3,7 @@ main = "index.js"
 compatibility_date = "2026-06-04"
 
 [vars]
-# LH_API_KEY는 wrangler secret put LH_API_KEY로 따로 설정해야 보안상 안전합니다.
+# API 키들은 wrangler secret put <KEY_NAME>으로 따로 설정해야 보안상 안전합니다.
+# 예: wrangler secret put LH_API_KEY
+# 예: wrangler secret put GEMINI_API_KEY
 LH_API_KEY = "f88fe2d8b348d0dea6cdcb334718c73bcc63afdfc10d8d6f511071e98f7a83cc"
